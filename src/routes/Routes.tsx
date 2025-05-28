@@ -3,7 +3,7 @@ import { ROUTES } from './routePaths';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 import Home from '../pages/home/Home';
-import Dashboard from '../pages/Dashboard/Dashboard';
+import Dashboard from '../components/Dashboard/Dashboard';
 
 // Import your page components here
 // import LoginPage from '../pages/auth/LoginPage';
