@@ -7,6 +7,7 @@ import {
     Button,
     Chip,
     Grid,
+    Divider,
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 
@@ -43,34 +44,6 @@ const recentJobs = [
 const Dashboard: React.FC = () => {
     return (
         <Box>
-            {/* Dashboard Header */}
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    mb: 4,
-                }}
-            >
-                <Typography
-                    variant="h4"
-                    sx={{
-                        color: 'text.primary',
-                        fontWeight: 600,
-                    }}
-                >
-                    Dashboard
-                </Typography>
-                <Button
-                    variant="contained"
-                    startIcon={<AddIcon />}
-                    color="primary"
-                    sx={{ px: 3 }}
-                >
-                    New Job Post
-                </Button>
-            </Box>
-
             {/* Stats Cards */}
             <Grid container spacing={3} sx={{ mb: 4 }}>
                 {statsData.map((stat, index) => (
@@ -103,135 +76,175 @@ const Dashboard: React.FC = () => {
                 ))}
             </Grid>
 
-            {/* Recent Jobs */}
-            <Card>
-                <CardContent>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            mb: 3,
-                        }}
-                    >
-                        <Typography
-                            variant="h6"
-                            sx={{
-                                color: 'text.primary',
-                                fontWeight: 600,
-                            }}
-                        >
-                            Recent Jobs
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            sx={{
-                                color: 'primary.main',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            View all jobs →
-                        </Typography>
-                    </Box>
+            {/* Recent Jobs Header */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mb: 3,
+                }}
+            >
+                <Typography
+                    variant="h6"
+                    sx={{
+                        color: 'text.primary',
+                        fontWeight: 600,
+                        fontSize: '1.25rem',
+                    }}
+                >
+                    Recent Jobs
+                </Typography>
+                <Button
+                    variant="text"
+                    sx={{
+                        color: 'primary.main',
+                        textTransform: 'none',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            textDecoration: 'underline',
+                        },
+                    }}
+                >
+                    View all jobs →
+                </Button>
+            </Box>
 
-                    {recentJobs.map((job, index) => (
-                        <Box
-                            key={index}
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                py: 2,
-                                borderBottom:
-                                    index < recentJobs.length - 1
-                                        ? '1px solid'
-                                        : 'none',
-                                borderColor: 'divider',
-                            }}
-                        >
-                            <Box>
-                                <Typography
-                                    variant="h6"
-                                    sx={{
-                                        color: 'text.primary',
-                                        mb: 1,
-                                        fontSize: '1.1rem',
-                                    }}
-                                >
-                                    {job.title}
-                                </Typography>
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: 2,
-                                        mb: 1,
-                                    }}
-                                >
+            {/* Individual Job Cards */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {recentJobs.map((job, index) => (
+                    <Card key={index}>
+                        <CardContent>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Box sx={{ flex: 1 }}>
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            color: 'text.primary',
+                                            mb: 1,
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                        }}
+                                    >
+                                        {job.title}
+                                    </Typography>
                                     <Box
                                         sx={{
                                             display: 'flex',
                                             alignItems: 'center',
-                                            gap: 0.5,
+                                            gap: 2,
+                                            mb: 1,
                                         }}
                                     >
                                         <Box
                                             sx={{
-                                                width: 8,
-                                                height: 8,
-                                                borderRadius: '50%',
-                                                backgroundColor: 'primary.main',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 0.5,
                                             }}
-                                        />
-                                        <Typography
-                                            variant="body2"
-                                            sx={{ color: 'text.secondary' }}
                                         >
-                                            {job.type}
-                                        </Typography>
+                                            <Box
+                                                sx={{
+                                                    width: 6,
+                                                    height: 6,
+                                                    borderRadius: '50%',
+                                                    backgroundColor: 'success.main',
+                                                }}
+                                            />
+                                            <Typography
+                                                variant="body2"
+                                                sx={{ 
+                                                    color: 'text.secondary',
+                                                    fontSize: '0.875rem',
+                                                }}
+                                            >
+                                                {job.type}
+                                            </Typography>
+                                        </Box>
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 0.5,
+                                            }}
+                                        >
+                                            <Typography
+                                                variant="body2"
+                                                sx={{ 
+                                                    color: 'error.main',
+                                                    fontSize: '0.875rem',
+                                                }}
+                                            >
+                                                📍 {job.location}
+                                            </Typography>
+                                        </Box>
                                     </Box>
                                     <Typography
                                         variant="body2"
-                                        sx={{ color: 'error.main' }}
+                                        sx={{ 
+                                            color: 'text.disabled',
+                                            fontSize: '0.75rem',
+                                        }}
                                     >
-                                        📍 {job.location}
+                                        Posted on : {job.postedDate}
                                     </Typography>
                                 </Box>
-                                <Typography
-                                    variant="body2"
-                                    sx={{ color: 'text.disabled' }}
-                                >
-                                    Posted on : {job.postedDate}
-                                </Typography>
-                            </Box>
 
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 2,
-                                }}
-                            >
-                                <Chip
-                                    label={job.status}
-                                    size="small"
+                                <Box
                                     sx={{
-                                        backgroundColor:
-                                            job.status === 'Open'
-                                                ? 'success.main'
-                                                : 'error.main',
-                                        color: 'white',
-                                        fontWeight: 500,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-end',
+                                        gap: 1,
+                                        ml: 2,
                                     }}
-                                />
-                                <Button variant="outlined" size="small">
-                                    View details
-                                </Button>
+                                >
+                                    <Button 
+                                        variant="outlined" 
+                                        size="small"
+                                        sx={{
+                                            textTransform: 'none',
+                                            fontSize: '0.875rem',
+                                            borderRadius: 4,
+                                            px: 2.5,
+                                            py: 0.75,
+                                            minWidth: 120,
+                                            marginBottom: 1,
+                                        }}
+                                    >
+                                        View details
+                                    </Button>
+                                    <Chip
+                                        label={job.status}
+                                        size="small"
+                                        sx={{
+                                            backgroundColor:
+                                                job.status === 'Open'
+                                                    ? 'success.main'
+                                                    : 'error.main',
+                                            color: 'white',
+                                            fontWeight: 500,
+                                            fontSize: '0.75rem',
+                                            height: 24,
+                                            minWidth: 60,
+                                            borderRadius: 4,
+                                            // marginTop: 1,
+                                        }}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
-                    ))}
-                </CardContent>
-            </Card>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
         </Box>
     );
 };

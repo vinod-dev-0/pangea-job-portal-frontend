@@ -1,47 +1,89 @@
+// Dashboard.tsx (Main Page)
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import RightPanel from '../../components/layout/RightPanel';
 import DashboardContent from '../../components/Dashboard/Dashboard';
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
     return (
         <Box
             sx={{
+                display: 'flex',
+                flexDirection: 'column',
                 minHeight: '100vh',
                 backgroundColor: 'background.default',
             }}
         >
-            {/* Header at the top */}
-            {/* TODO:Change the header to App.tsx */}
+            {/* Header - spans full width */}
             <Header />
 
-            {/* Layout below Header: Sidebar + Content + RightPanel */}
+            {/* Main layout with sidebar and content */}
             <Box
                 sx={{
                     display: 'flex',
-                    minHeight: 'calc(100vh - 64px)', // Adjust based on Header height
+                    flexGrow: 1,
                 }}
             >
                 {/* Sidebar */}
                 <Sidebar />
 
-                {/* Main Content + Right Panel */}
+                {/* Main Content Area */}
                 <Box
                     sx={{
                         flexGrow: 1,
                         display: 'flex',
-                        flexDirection: 'row',
+                        flexDirection: 'column',
+                    }}
+                >
+
+                {/* Dashboard Header - spans full width */}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        px: 3,
+                        pt: 3,
+                        pb: 2,
+                    }}
+                >
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            color: 'text.primary',
+                            fontWeight: 600,
+                        }}
+                    >
+                        Dashboard
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        startIcon={<AddIcon />}
+                        color="primary"
+                        sx={{ px: 3 }}
+                    >
+                        New Job Post
+                    </Button>
+                </Box>
+
+                {/* Content with Right Panel */}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexGrow: 1,
                         gap: 3,
-                        p: 3,
+                        px: 3,
+                        pb: 3,
                     }}
                 >
                     {/* Main Dashboard Content */}
                     <Box
                         sx={{
                             flexGrow: 1,
-                            minWidth: 0,
+                            minWidth: 0, // Prevents flex item from overflowing
                         }}
                     >
                         <DashboardContent />
@@ -49,6 +91,7 @@ const Dashboard = () => {
 
                     {/* Right Panel */}
                     <RightPanel />
+                </Box>
                 </Box>
             </Box>
         </Box>
